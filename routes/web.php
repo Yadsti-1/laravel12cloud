@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,6 +11,9 @@ Route::get('/', function () {
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+
+Route::POST('/procesar-pdf', [PDFController::class, 'procesarPDF'])->name('procesar.pdf');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
